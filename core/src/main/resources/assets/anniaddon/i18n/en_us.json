@@ -1,0 +1,12 @@
+{
+  "anniaddon": {
+    "hudWidget": {
+      "totalkillWidget": {
+        "name": "TotalKill Counter"
+      },
+      "activekillWidget": {
+        "name": "ActiveKill Counter"
+      }
+    }
+  }
+}
