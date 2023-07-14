@@ -31,7 +31,7 @@ public class AnniStatsAddon extends LabyAddon<AnniAddonConfiguration> {
     registry.register(new AnniActiveKillHudWidget());
 
     this.registerListener(new ExampleGameTickListener(this));
-    this.registerListener(new AnniMessageReciveListener());
+    this.registerListener(new AnniMessageReciveListener(this));
 
     this.registerCommand(new resetKillCounterCommand());
     this.registerCommand(new ExamplePingCommand());

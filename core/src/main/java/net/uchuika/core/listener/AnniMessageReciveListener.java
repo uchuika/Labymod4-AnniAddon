@@ -3,20 +3,36 @@ package net.uchuika.core.listener;
 import net.labymod.api.Laby;
 import net.labymod.api.client.Minecraft;
 import net.labymod.api.event.Subscribe;
+import net.labymod.api.event.client.chat.ChatMessageSendEvent;
+import net.labymod.api.event.client.chat.ChatMessageUpdateEvent;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
 import net.uchuika.core.AnniPlayerData;
 import net.uchuika.core.AnniStatsAddon;
 
 public class AnniMessageReciveListener {
+
+  private final AnniStatsAddon addon;
+  public AnniMessageReciveListener(AnniStatsAddon addon) {
+    this.addon = addon;
+  }
+
   @Subscribe
   public void onChat(ChatReceiveEvent event) {
-    String chat = event.chatMessage().component().toString();
+    String chat = event.chatMessage().getPlainText();
 
+    //System.out.println("chatis:" + chat);
     onReceiveChat(chat);
   }
 
   public static void onReceiveChat(String chat) {
     String[] split = chat.split((" "));
+
+    /*
+    if(chat.contains(Laby.labyAPI().minecraft().getClientPlayer().getName())){
+      AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("name");
+    }
+
+     */
 
     //Nexusカウンター
     if(split.length>=7){
