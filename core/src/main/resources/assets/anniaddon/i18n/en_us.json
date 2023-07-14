@@ -6,6 +6,9 @@
       },
       "activekillWidget": {
         "name": "ActiveKill Counter"
+      },
+      "NexusCountWidget": {
+        "name": "Nexus Counter"
       }
     }
   }

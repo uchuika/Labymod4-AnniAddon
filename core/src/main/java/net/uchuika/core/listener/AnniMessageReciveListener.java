@@ -27,13 +27,6 @@ public class AnniMessageReciveListener {
   public static void onReceiveChat(String chat) {
     String[] split = chat.split((" "));
 
-    /*
-    if(chat.contains(Laby.labyAPI().minecraft().getClientPlayer().getName())){
-      AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("name");
-    }
-
-     */
-
     //Nexusカウンター
     if(split.length>=7){
       if(split[6].equals("nexus!")){
@@ -54,19 +47,19 @@ public class AnniMessageReciveListener {
           if(addinfo.contains("attacking")){
             AnniPlayerData.meleekillCount++;
             AnniPlayerData.activekillCount++;
-           AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("Attacking kill");
+           //AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("Attacking kill");
           }else if(addinfo.contains("defending")) {
             AnniPlayerData.meleekillCount++;
             AnniPlayerData.activekillCount++;
-            AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("defending kill");
+            //AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("defending kill");
           }else if(addinfo.contains("in")) {
             AnniPlayerData.meleekillCount++;
             AnniPlayerData.activekillCount++;
-            AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("in kill");
+            //AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("in kill");
           }
         }else {
           //Minecraft.getInstance().player.sendMessage(new StringTextComponent("kill"), Util.DUMMY_UUID);
-          AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("kill");
+          //AnniStatsAddon.get().labyAPI().minecraft().chatExecutor().displayClientMessage("kill");
 
           AnniPlayerData.meleekillCount++;
           AnniPlayerData.activekillCount++;

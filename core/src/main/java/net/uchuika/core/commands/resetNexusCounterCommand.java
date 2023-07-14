@@ -6,21 +6,19 @@ import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.notification.NotificationController;
 import net.uchuika.core.AnniPlayerData;
-import java.awt.*;
 
-public class resetKillCounterCommand extends Command {
+public class resetNexusCounterCommand extends Command {
   private final NotificationController notificationController;
 
-  public resetKillCounterCommand() {
-    super("resetkills");
+  public resetNexusCounterCommand() {
+    super("resetnexus");
     this.notificationController = Laby.references().notificationController();
   }
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
-    AnniPlayerData.meleekillCount = 0;
-    AnniPlayerData.activekillCount = 0;
-    this.displayMessage(Component.text("resetKills!!!", NamedTextColor.AQUA));
+    AnniPlayerData.nexus = 0;
+    this.displayMessage(Component.text("resetnexus!!!!!!", NamedTextColor.AQUA));
     return true;
   }
 }

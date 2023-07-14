@@ -4,9 +4,11 @@ import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.uchuika.core.HudWidget.AnniActiveKillHudWidget;
+import net.uchuika.core.HudWidget.AnniNexusHudWidget;
 import net.uchuika.core.HudWidget.AnniTotalKillHudWidget;
 import net.uchuika.core.commands.ExamplePingCommand;
 import net.uchuika.core.commands.resetKillCounterCommand;
+import net.uchuika.core.commands.resetNexusCounterCommand;
 import net.uchuika.core.listener.AnniMessageReciveListener;
 import net.uchuika.core.listener.ExampleGameTickListener;
 
@@ -29,10 +31,12 @@ public class AnniStatsAddon extends LabyAddon<AnniAddonConfiguration> {
     HudWidgetRegistry registry = this.labyAPI().hudWidgetRegistry();
     registry.register(new AnniTotalKillHudWidget());
     registry.register(new AnniActiveKillHudWidget());
+    registry.register(new AnniNexusHudWidget());
 
     this.registerListener(new ExampleGameTickListener(this));
     this.registerListener(new AnniMessageReciveListener(this));
 
+    this.registerCommand(new resetNexusCounterCommand());
     this.registerCommand(new resetKillCounterCommand());
     this.registerCommand(new ExamplePingCommand());
 
