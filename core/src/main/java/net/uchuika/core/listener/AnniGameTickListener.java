@@ -5,13 +5,18 @@ import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.lifecycle.GameTickEvent;
 import net.uchuika.core.AnniStatsAddon;
 
-public class ExampleGameTickListener {
+public class AnniGameTickListener {
 
   private final AnniStatsAddon addon;
 
-  public ExampleGameTickListener(AnniStatsAddon addon) {
+
+  public String ActionBar;
+
+  public AnniGameTickListener(AnniStatsAddon addon) {
     this.addon = addon;
   }
+  public String temp1ActionBar = "";
+  public String temp2ActionBar = "";
 
   @Subscribe
   public void onGameTick(GameTickEvent event) {
@@ -19,6 +24,13 @@ public class ExampleGameTickListener {
       return;
     }
 
-    //this.addon.logger().info(this.addon.configuration().enabled().get() ? "enabled" : "disabled");
+    /*
+    if(!(temp1ActionBar.equals(temp2ActionBar))){
+      temp1ActionBar = temp2ActionBar;
+    }else{
+      temp2ActionBar
+    }
+
+     */
   }
 }

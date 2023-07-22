@@ -1,13 +1,16 @@
 package net.uchuika.core.listener;
 
+import com.google.gson.internal.reflect.ReflectionAccessor;
 import net.labymod.api.Laby;
 import net.labymod.api.client.Minecraft;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatMessageSendEvent;
 import net.labymod.api.event.client.chat.ChatMessageUpdateEvent;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
+import net.labymod.api.util.reflection.Reflection;
 import net.uchuika.core.AnniPlayerData;
 import net.uchuika.core.AnniStatsAddon;
+import javax.swing.*;
 
 public class AnniMessageReciveListener {
 
@@ -19,23 +22,15 @@ public class AnniMessageReciveListener {
   @Subscribe
   public void onChat(ChatReceiveEvent event) {
     String chat = event.chatMessage().getPlainText();
+    //String ActionBar = AnniStatsAddon.getActionbar();
 
-    //System.out.println("chatis:" + chat);
+   // System.out.println("ActionBar is:" + ActionBar);
+    System.out.println("chatis:" + chat);
     onReceiveChat(chat);
   }
 
   public static void onReceiveChat(String chat) {
     String[] split = chat.split((" "));
-
-    //Nexusカウンター
-    if(split.length>=7){
-      if(split[6].equals("nexus!")){
-        String user = split[0];
-        if(user.contains(Laby.labyAPI().minecraft().getClientPlayer().getName())){
-          AnniPlayerData.nexus++;
-        }
-      }
-    }
 
     if(split.length>=3&&chat.contains("killed") || chat.contains("shot")) {
       String killer=split[0].substring(0, split[0].length()-5);

@@ -6,4 +6,6 @@ public class AnniPlayerData {
   public static int activekillCount;
 
   public static int nexus;
+
+  public static int NexusTemp;
 }
