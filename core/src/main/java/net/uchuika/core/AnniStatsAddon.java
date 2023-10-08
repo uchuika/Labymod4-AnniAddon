@@ -10,8 +10,10 @@ import net.uchuika.core.commands.ExamplePingCommand;
 import net.uchuika.core.commands.resetKillCounterCommand;
 import net.uchuika.core.commands.resetNexusCounterCommand;
 import net.uchuika.core.generated.DefaultReferenceStorage;
+import net.uchuika.core.listener.ANNIPlayerListListener;
 import net.uchuika.core.listener.AnniGameTickListener;
 import net.uchuika.core.listener.AnniMessageReciveListener;
+import net.uchuika.core.listener.AnniScoreboardListener;
 import net.uchuika.core.listener.NewAnniActionBarListener;
 
 @AddonMain
@@ -46,6 +48,8 @@ public class AnniStatsAddon extends LabyAddon<AnniAddonConfiguration> {
     this.registerListener(new AnniGameTickListener(this));
     this.registerListener(new AnniMessageReciveListener(this));
     this.registerListener(new NewAnniActionBarListener(this));
+    //this.registerListener(new AnniScoreboardListener(this));
+    this.registerListener(new ANNIPlayerListListener(this));
 
     this.registerCommand(new resetNexusCounterCommand());
     this.registerCommand(new resetKillCounterCommand());
@@ -61,7 +65,9 @@ public class AnniStatsAddon extends LabyAddon<AnniAddonConfiguration> {
     return Actionbar;
   }
 
-
+  public static LabyAddon getAddon(){
+    return instance;
+  }
 
   @Override
   protected Class<AnniAddonConfiguration> configurationClass() {

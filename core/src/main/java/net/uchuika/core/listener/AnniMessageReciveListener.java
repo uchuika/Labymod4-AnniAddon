@@ -10,11 +10,15 @@ import net.labymod.api.event.client.chat.ChatReceiveEvent;
 import net.labymod.api.util.reflection.Reflection;
 import net.uchuika.core.AnniPlayerData;
 import net.uchuika.core.AnniStatsAddon;
+import net.uchuika.core.Utils.PlayerRankList;
 import javax.swing.*;
 
 public class AnniMessageReciveListener {
 
   private final AnniStatsAddon addon;
+
+  private static String rankPlayerName = null;
+
   public AnniMessageReciveListener(AnniStatsAddon addon) {
     this.addon = addon;
   }
@@ -31,6 +35,19 @@ public class AnniMessageReciveListener {
 
   public static void onReceiveChat(String chat) {
     String[] split = chat.split((" "));
+
+    if(split.length>=3){
+      if(split[1].contains("Rank")){
+        rankPlayerName = split[4];
+      }
+
+      if(split[0].contains("Current")){       //Current rank: GrandMaster-I
+        if(split[1].contains("rank")){
+          String rank = split[2];
+          PlayerRankList.setPlayerRankList(rankPlayerName, rank);
+        }
+      }
+    }
 
     if(split.length>=3&&chat.contains("killed") || chat.contains("shot")) {
       String killer=split[0].substring(0, split[0].length()-5);
