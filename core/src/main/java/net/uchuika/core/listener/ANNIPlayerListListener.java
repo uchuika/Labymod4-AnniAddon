@@ -26,8 +26,6 @@ public class ANNIPlayerListListener {
 
   private static String displayName;
 
-  private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
   public ANNIPlayerListListener(AnniStatsAddon addon) {
     this.addon = addon;
   }
@@ -36,6 +34,8 @@ public class ANNIPlayerListListener {
   public void onPlayer(PlayerNameTagRenderEvent e) {
 
     String[] split = null;
+
+    String minecraftVersion = Laby.labyAPI().minecraft().getVersion();
 
     Map<String, String> playerRankList = new HashMap<>();
     playerRankList = PlayerRankList.getPlayerRankList();
@@ -48,22 +48,44 @@ public class ANNIPlayerListListener {
         && Laby.labyAPI().minecraft().getScoreboard().getObjective(DisplaySlot.SIDEBAR).getTitle()
         .toString().contains("ANNI")) {
 
+
       if (!(e.playerInfo() == null)) {
-        if (!(e.playerInfo().displayName().toString().contains("empty["))) {
-          PLayerNameString = e.playerInfo().displayName().toString();
-          //System.out.println("nameString:" + PLayerNameString);
 
-          int Beginindex = PLayerNameString.indexOf("literal{");
-          int EndIndex = PLayerNameString.indexOf("}");
-          displayName = PLayerNameString.substring(Beginindex + 8, EndIndex);
-        } else if (split.length >= 7) {
+        if(minecraftVersion.contains("1.16.5") || minecraftVersion.contains("1.17.1") || minecraftVersion.contains("1.18.2")){
+          if(!(e.playerInfo().displayName().toString().contains("text=''"))) {
+            PLayerNameString = e.playerInfo().displayName().toString();
+            //System.out.println("nameString:" + PLayerNameString);
 
-          PLayerNameString = split[5];
-          //System.out.println("nameString:" + PLayerNameString);
+            int Beginindex = PLayerNameString.indexOf("ponent{text='");
+            int EndIndex = PLayerNameString.indexOf("',");
+            displayName = PLayerNameString.substring(Beginindex + 13, EndIndex);
+          } else if (split.length >= 100) {
 
-          int Beginindex = PLayerNameString.indexOf("literal{");
-          int EndIndex = PLayerNameString.indexOf("}[");
-          displayName = PLayerNameString.substring(Beginindex + 8, EndIndex);
+            PLayerNameString = split[65];
+            //System.out.println("nameString:" + PLayerNameString);
+
+            int Beginindex = PLayerNameString.indexOf("TextComponent{text='");
+            int EndIndex = PLayerNameString.indexOf("',");
+            displayName = PLayerNameString.substring(Beginindex + 20, EndIndex);
+          }
+
+        }else{
+          if (!(e.playerInfo().displayName().toString().contains("empty["))) {
+            PLayerNameString = e.playerInfo().displayName().toString();
+            //System.out.println("nameString:" + PLayerNameString);
+
+            int Beginindex = PLayerNameString.indexOf("literal{");
+            int EndIndex = PLayerNameString.indexOf("}");
+            displayName = PLayerNameString.substring(Beginindex + 8, EndIndex);
+          } else if (split.length >= 7) {
+
+            PLayerNameString = split[5];
+            //System.out.println("nameString:" + PLayerNameString);
+
+            int Beginindex = PLayerNameString.indexOf("literal{");
+            int EndIndex = PLayerNameString.indexOf("}[");
+            displayName = PLayerNameString.substring(Beginindex + 8, EndIndex);
+          }
         }
       }
 
@@ -77,9 +99,11 @@ public class ANNIPlayerListListener {
         Laby.labyAPI().minecraft().chatExecutor().chat(testMessage);
 
         playerList.add(displayName);
-
       }
     }
+
+    //System.out.println(Laby.labyAPI().minecraft().getVersion());
+    /*
 
     if (!(e.playerInfo() == null)) {
       if (!(playerRankList.get(displayName) == null)) {
@@ -121,5 +145,7 @@ public class ANNIPlayerListListener {
         }
       }
     }
+
+     */
   }
 }

@@ -1,12 +1,15 @@
 package net.uchuika.core;
 
 import net.labymod.api.addon.LabyAddon;
+import net.labymod.api.client.entity.player.tag.PositionType;
+import net.labymod.api.client.entity.player.tag.TagRegistry;
 import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.uchuika.core.HudWidget.AnniActiveKillHudWidget;
 import net.uchuika.core.HudWidget.AnniNexusHudWidget;
 import net.uchuika.core.HudWidget.AnniTotalKillHudWidget;
 import net.uchuika.core.commands.ExamplePingCommand;
+import net.uchuika.core.commands.nametag.RankNameTag;
 import net.uchuika.core.commands.resetKillCounterCommand;
 import net.uchuika.core.commands.resetNexusCounterCommand;
 import net.uchuika.core.generated.DefaultReferenceStorage;
@@ -15,6 +18,7 @@ import net.uchuika.core.listener.AnniGameTickListener;
 import net.uchuika.core.listener.AnniMessageReciveListener;
 import net.uchuika.core.listener.AnniScoreboardListener;
 import net.uchuika.core.listener.NewAnniActionBarListener;
+import org.w3c.dom.html.HTMLBRElement;
 
 @AddonMain
 public class AnniStatsAddon extends LabyAddon<AnniAddonConfiguration> {
@@ -54,6 +58,13 @@ public class AnniStatsAddon extends LabyAddon<AnniAddonConfiguration> {
     this.registerCommand(new resetNexusCounterCommand());
     this.registerCommand(new resetKillCounterCommand());
     this.registerCommand(new ExamplePingCommand());
+
+    TagRegistry tagRegistry = this.labyAPI().tagRegistry();
+    tagRegistry.register(
+        "anni_ranknametag",
+        PositionType.ABOVE_NAME,
+        new RankNameTag(this)
+    );
 
     this.logger().info("Enabled the Addon");
   }

@@ -16,15 +16,24 @@ public class NewAnniActionBarListener {
 
   @Subscribe
   public void onActionBar(ActionBarReceiveEvent event) {
-    String ActionBarMessage = event.message().toString();
-
-    int Beginindex = ActionBarMessage.indexOf("literal");
-    int EndIndex = ActionBarMessage.indexOf("}[style");
-    String message = ActionBarMessage.substring(Beginindex+8, EndIndex);
+    String ActionBarMessage = event.getMessage().toString();
 
     //System.out.println(ActionBarMessage);
-    //System.out.println("Beginindex is:" + Beginindex);
-   // System.out.println("EndIndex is:" + EndIndex);
+
+    String minecraftVersion = Laby.labyAPI().minecraft().getVersion();
+
+    String message;
+
+    if(minecraftVersion.contains("1.16.5") || minecraftVersion.contains("1.17.1") || minecraftVersion.contains("1.18.2")){
+      int Beginindex = ActionBarMessage.indexOf("{text='");
+      int EndIndex = ActionBarMessage.indexOf("',");
+      message = ActionBarMessage.substring(Beginindex+9, EndIndex);
+    }else{
+      int Beginindex = ActionBarMessage.indexOf("literal");
+      int EndIndex = ActionBarMessage.indexOf("}[style");
+      message = ActionBarMessage.substring(Beginindex+8, EndIndex);
+    }
+
     System.out.println("ActionBar message is:" + message);
 
     String[] split = message.split(" ");
